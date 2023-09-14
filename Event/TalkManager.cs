@@ -1,5 +1,5 @@
 //このコードはテキストウィンドウを制御します。
-//FieldManager.csと一緒に使って下さい。
+//ModeManager.csと一緒に使って下さい。
 //子オブジェクトに会話内容と名前のTextのUIを配置したテキストボックスにアタッチして使います。
 //csvファイルには会話内容n行目,名前をカンマ区切りで表記します。
 //会話を終了させる際はcsvに空の行を表記します。
@@ -70,10 +70,13 @@ public class TalkManager : MonoBehaviour
         //デバッグ用
         if (Input.GetMouseButtonDown(0) & _debugMode)
         {
-            if (FieldManager._gameMode == FieldManager.Mode.SCENARIO) Talk(_talkID);
-            else if (FieldManager._gameMode == FieldManager.Mode.FIELD) TalkStart(_debugID);
+            if (ModeManager._gameMode == ModeManager.Mode.SCENARIO) Talk(_talkID);
+            else if (ModeManager._gameMode == ModeManager.Mode.FIELD) TalkStart(_debugID);
         }
-        
+    }
+
+    void FixedUpdate()
+    {   
         //次の文字が表示されるシステム
         if (_textTime == 0 & _allVoice != "")
         {
@@ -109,7 +112,7 @@ public class TalkManager : MonoBehaviour
     public void TalkStart(int ID)
     {
         //モードをシナリオモードにする
-        FieldManager._gameMode = FieldManager.Mode.SCENARIO;
+        ModeManager._gameMode = ModeManager.Mode.SCENARIO;
 
         //会話ウィンドウを表示する
         gameObject.SetActive(true);
@@ -157,7 +160,7 @@ public class TalkManager : MonoBehaviour
                 if (_windowBreak) gameObject.SetActive(false);
                 
                 //モードをフィールドモードにする
-                FieldManager._gameMode = FieldManager.Mode.FIELD;
+                ModeManager._gameMode = ModeManager.Mode.FIELD;
             }
         }
     }
