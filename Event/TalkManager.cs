@@ -26,9 +26,9 @@ public class TalkManager : MonoBehaviour
     [SerializeField] bool _windowBreak = true;
 
     //名前テキストが表示されるUI
-    Text _nameBox;
+    [SerializeField] Text _nameBox;
     //会話テキストが表示されるUI
-    Text _talkBox;
+    [SerializeField] Text _talkBox;
 
     //テキストが入っているcsvファイル
     [SerializeField] TextAsset _csvFile;
@@ -53,10 +53,6 @@ public class TalkManager : MonoBehaviour
 
     void Awake()
     {
-        //各テキストの読み取り
-        _talkBox = transform.GetChild(0).gameObject.GetComponent<Text>();
-        _nameBox = transform.GetChild(1).gameObject.GetComponent<Text>();
-
         //csvファイルの読み込み
         StringReader reader = new StringReader(_csvFile.text);
         while (reader.Peek() != -1)
