@@ -1,6 +1,7 @@
 //このコードはクリックエフェクトを制御します。
 //EffectManagerにアタッチして使います。
 //EffectManagerとは別に、非アクティブのクリックエフェクトが子オブジェクトとして必要です。
+//エフェクトを最前面に表示する場合、UIとエフェクトとそれ以外、それぞれを表示する専用のカメラがあると良いです。
 
 using System.Collections;
 using UnityEngine;
