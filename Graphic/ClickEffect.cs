@@ -1,6 +1,6 @@
 //このコードはクリックエフェクトを制御します。
 //EffectManagerにアタッチして使います。
-//EffectManagerとは別に、非アクティブのクリックエフェクトが子オブジェクトとしてに必要です。
+//EffectManagerとは別に、非アクティブのクリックエフェクトが子オブジェクトとして必要です。
 
 using System.Collections;
 using UnityEngine;
