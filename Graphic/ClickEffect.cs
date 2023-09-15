@@ -26,8 +26,8 @@ public class ClickEffect : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //各エフェクトをアクティブにする
-            _clickEffect.SetActive(true);
-            _dragEffect.SetActive(true);
+            _clickEffect?.SetActive(true);
+            _dragEffect?.SetActive(true);
 
             //数秒後にエフェクトを非アクティブにする
             if (_effectCoroutine != null) StopCoroutine(_effectCoroutine);
@@ -35,7 +35,7 @@ public class ClickEffect : MonoBehaviour
         }
 
         //ボタンを離したらエフェクトを非アクティブにする
-        if (Input.GetMouseButtonUp(0)) _dragEffect.SetActive(false);
+        if (Input.GetMouseButtonUp(0)) _dragEffect?.SetActive(false);
 
         //マウスカーソルの位置を取得する
         _mousePosition = Input.mousePosition;
@@ -49,6 +49,6 @@ public class ClickEffect : MonoBehaviour
     IEnumerator ClickEffectDestroy()
     {
         yield return new WaitForSeconds(_effectTime);
-        _clickEffect.SetActive(false);
+        _clickEffect?.SetActive(false);
     }
 }
