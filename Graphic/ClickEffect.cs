@@ -8,6 +8,9 @@ using UnityEngine;
 
 public class ClickEffect : MonoBehaviour
 {
+    //エフェクトカメラ
+    [SerializeField] Camera _effectCamera;
+
     //押した瞬間に出る非アクティブのクリックエフェクト
     [SerializeField] GameObject _clickEffect;
     //押し続けた時に出る非アクティブのクリックエフェクト
@@ -26,30 +29,35 @@ public class ClickEffect : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //各エフェクトをアクティブにする
-            _clickEffect?.SetActive(true);
-            _dragEffect?.SetActive(true);
+            if (_clickEffect)
+            {
+                 //押した瞬間に出るエフェクトをアクティブにする
+                _clickEffect.SetActive(true);
 
-            //数秒後にエフェクトを非アクティブにする
-            if (_effectCoroutine != null) StopCoroutine(_effectCoroutine);
-            _effectCoroutine = StartCoroutine(ClickEffectDestroy());
+                //数秒後にエフェクトを非アクティブにする
+                if (_effectCoroutine != null) StopCoroutine(_effectCoroutine);
+                _effectCoroutine = StartCoroutine(ClickEffectDestroy());
+            }
+
+            //押し続けた時に出るエフェクトをアクティブにする
+            if (_dragEffect) _dragEffect.SetActive(true);
         }
 
         //ボタンを離したらエフェクトを非アクティブにする
-        if (Input.GetMouseButtonUp(0)) _dragEffect?.SetActive(false);
+        if (Input.GetMouseButtonUp(0) & _dragEffect) _dragEffect.SetActive(false);
 
         //マウスカーソルの位置を取得する
         _mousePosition = Input.mousePosition;
 
         //マウスカーソルの位置をワールド座標に変換してエフェクトの位置を重ねる
         _mousePosition.z = 1;
-        transform.position = Camera.main.ScreenToWorldPoint(_mousePosition);
+        transform.position = _effectCamera.ScreenToWorldPoint(_mousePosition);
     }
 
     //エフェクトを非アクティブにする
     IEnumerator ClickEffectDestroy()
     {
         yield return new WaitForSeconds(_effectTime);
-        _clickEffect?.SetActive(false);
+        _clickEffect.SetActive(false);
     }
 }
